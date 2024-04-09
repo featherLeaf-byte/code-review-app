@@ -72,6 +72,11 @@ main {
   font-size: large;
 }
 .code-submit-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   height: 50px;
   width: 200px;
   margin-top: 15px;
@@ -90,4 +95,8 @@ main {
 }
 .review-output {
   min-height: 200px;
+  margin-bottom: 20px;
+}
+.review-output {
+  white-space: pre-wrap;
 }

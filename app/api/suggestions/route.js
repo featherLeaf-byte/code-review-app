@@ -2,8 +2,9 @@ import { OpenAI } from 'openai'
 import { NextResponse } from 'next/server'
 
 export async function POST(req) {
-  const OPENAI_KEY = process.env.OPENAI_API_KEY
+  const OPENAI_KEY = 'key'
   const code = await req.json()
+  console.log(OPENAI_KEY)
   if (!code) {
     return NextResponse.json({ message: 'No code' }, { status: 401 })
   }
@@ -29,6 +30,7 @@ export async function POST(req) {
     const result = completetions.choices[0].message.content
     return NextResponse.json({ result })
   } catch (error) {
+    console.log(error)
     return NextResponse.json(
       { message: 'The request failed...' },
       { status: 500 }

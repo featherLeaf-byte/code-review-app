@@ -96,5 +96,7 @@ main {
 .review-output {
   min-height: 200px;
   margin-bottom: 20px;
+}
+.review-output {
   white-space: pre-wrap;
 }

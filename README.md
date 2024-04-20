@@ -22,7 +22,6 @@ Navigate to the project directory in your terminal.
 
 Create a file named .env.local in the project root directory (important: keep this file out of version control).
 In .env.local, define the OPENAI_API_KEY environment variable needed by the server-side API endpoint, then provide the API key
-
 Development
 
 Start the development server:

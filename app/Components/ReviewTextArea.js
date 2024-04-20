@@ -1,53 +1,43 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import ReviewSubmitButton from './ReviewSubmitButton'
 import ReviewOutput from './ReviewOutput'
-import Editor from '@monaco-editor/react'
 
 function ReviewTextArea() {
   const [review, setReview] = useState('')
   const [code, setCode] = useState('')
+
   async function handleSubmit() {
-    if (!editorRef.current.getValue()) {
+    if (!code) {
       alert('Missing code input!')
-    } else
-      try {
-        const url = '/api/suggestions'
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(editorRef.current.getValue()),
-        })
-        if (!res.ok) {
-          const data = await res.json()
-          console.log(data)
-        }
-        const { result } = await res.json()
-        setReview(result)
-      } catch (err) {
-        alert(err)
-      }
-  }
-  const editorRef = useRef(null)
-  function handleEditorDidMount(editor, monaco) {
-    editorRef.current = editor
+    }
+    try {
+      const url = '/api/suggestions'
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(code),
+      })
+      const { result } = await res.json()
+      setReview(result)
+    } catch (err) {
+      alert(err)
+    }
   }
   return (
     <>
       <div className="code-form">
-        <h2 htmlFor="code-box">Insert Code</h2>
-        <Editor
-          height="300px"
-          language="javascript"
-          theme="vs-dark"
-          onMount={handleEditorDidMount}
-          options={{
-            inlineSuggest: true,
-            fontSize: '16px',
-            formatOnType: true,
-            autoClosingBrackets: true,
+        <label htmlFor="code-box">Insert Code</label>
+        <textarea
+          placeholder="Code goes here...."
+          id="code-box"
+          cols="30"
+          rows="10"
+          onChange={(e) => {
+            e.preventDefault
+            setCode(e.target.value)
           }}
-        />
+        ></textarea>
         <ReviewSubmitButton handleSubmit={handleSubmit} />
       </div>
       <ReviewOutput review={review} />

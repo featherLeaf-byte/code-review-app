@@ -3,11 +3,12 @@ import { NextResponse } from 'next/server'
 
 export async function POST(req) {
   const OPENAI_KEY = process.env.OPENAI_API_KEY
+  const openai = new OpenAI(OPENAI_KEY)
   const code = await req.json()
   if (!code) {
     return NextResponse.json({ message: 'No code' }, { status: 401 })
   }
-  const openai = new OpenAI(OPENAI_KEY)
+
   try {
     const completetions = await openai.chat.completions.create({
       messages: [
@@ -29,9 +30,6 @@ export async function POST(req) {
     const result = completetions.choices[0].message.content
     return NextResponse.json({ result })
   } catch (error) {
-    return NextResponse.json(
-      { message: 'The request failed...' },
-      { status: 500 }
-    )
+    return NextResponse.json(error)
   }
 }

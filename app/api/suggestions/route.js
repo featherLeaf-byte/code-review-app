@@ -2,9 +2,8 @@ import { OpenAI } from 'openai'
 import { NextResponse } from 'next/server'
 
 export async function POST(req) {
-  const OPENAI_KEY = 'key'
+  const OPENAI_KEY = process.env.OPENAI_KEY
   const code = await req.json()
-  console.log(OPENAI_KEY)
   if (!code) {
     return NextResponse.json({ message: 'No code' }, { status: 401 })
   }

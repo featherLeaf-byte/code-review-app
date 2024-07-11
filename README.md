@@ -7,7 +7,8 @@ This Next.js application provides a user interface for submitting code and recei
 ## Prerequisite
 
 Node.js and npm (or yarn) installed on your system. You can verify their installation by running node -v and npm -v (or yarn -v) in your terminal.
-Installation
+
+### Installation
 
 Clone this repository or download the project files.
 
